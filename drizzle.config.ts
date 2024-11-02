@@ -5,10 +5,9 @@ import env from "@/env-runtime";
 export default defineConfig({
   schema: "./src/db/schema/index.ts",
   out: "./src/db/migrations",
-  dialect: "sqlite",
-
+  dialect: 'turso',
   dbCredentials: {
     url: env.DATABASE_URL,
-    token: env.TURSO_AUTH_TOKEN,
+    authToken: env.TURSO_AUTH_TOKEN,
   },
 });

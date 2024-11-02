@@ -11,16 +11,16 @@ if (env.NODE_ENV !== "development") {
 async function seedDatabase() {
   const { db } = createDb(env);
   for (const table of [
-    schema.threats,
+    schema.tasks,
 
   ]) {
-    // if (table === schema.threats) {
-    //   console.log("threats", table.name);
+    // if (table === schema.tasks) {
+    //   console.log("tasks", table.name);
     // }
     await db.delete(table);
   }
 
-  await seeds.threats(db);
+  await seeds.tasks(db);
 }
 
 seedDatabase()

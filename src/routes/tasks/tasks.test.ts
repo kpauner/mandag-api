@@ -6,7 +6,7 @@ import { afterAll, beforeAll, describe, expect, expectTypeOf, it } from "vitest"
 import env from "@/env-runtime";
 import createApp, { createTestApp } from "@/lib/create-app";
 
-import router from "./threats.index";
+import router from "./tasks.index";
 
 if (env.NODE_ENV !== "test") {
   throw new Error("NODE_ENV must be 'test'");
@@ -14,7 +14,7 @@ if (env.NODE_ENV !== "test") {
 
 const client = testClient(createApp().route("/", router));
 
-describe("threats routes", () => {
+describe("tasks routes", () => {
   beforeAll(async () => {
     execSync("bun run drizzle-kit push");
   });
@@ -23,8 +23,8 @@ describe("threats routes", () => {
     fs.rmSync("test.db", { force: true });
   });
 
-  it("should return a list of threats with pagination", async () => {
-    const response = await client.threats.$get({ query: { page: 1, limit: 10 } });
+  it("should return a list of tasks with pagination", async () => {
+    const response = await client.tasks.$get({ query: { page: 1, limit: 10 } });
     const json = await response.json();
     expectTypeOf(json).toBeArray();
   });

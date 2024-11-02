@@ -1,8 +1,8 @@
 import type { DB } from "@/db";
 
-import data from "@/db/seeds/data/threats.json";
+import data from "@/db/seeds/data/tasks.json";
 
-import { threats } from "../schema";
+import { tasks } from "../schema";
 
 export default async function seed(db: DB) {
   
@@ -14,5 +14,5 @@ export default async function seed(db: DB) {
   if (!formattedData) {
     return;
   }
-  await db.insert(threats).values(formattedData);
+  await db.insert(tasks).values(formattedData);
 }

@@ -4,8 +4,8 @@
   "id": "46615185-2c51-4a33-8868-e8401ae469ae",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
-    "threats": {
-      "name": "threats",
+    "tasks": {
+      "name": "tasks",
       "columns": {
         "id": {
           "name": "id",
@@ -46,8 +46,8 @@
         }
       },
       "indexes": {
-        "threats_email_unique": {
-          "name": "threats_email_unique",
+        "tasks_email_unique": {
+          "name": "tasks_email_unique",
           "columns": [
             "email"
           ],

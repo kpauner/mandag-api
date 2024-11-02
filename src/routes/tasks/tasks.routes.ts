@@ -1,6 +1,6 @@
 import { createRoute, z } from "@hono/zod-openapi";
 
-import { InsertThreatsSchema, patchThreatsSchema, SelectThreatsSchema } from "@/db/schema/threats";
+import { InserttasksSchema, patchtasksSchema, SelecttasksSchema } from "@/db/schema/tasks";
 import { notFoundSchema } from "@/lib/constants";
 import jsonContent from "@/openapi/helpers/json-content";
 import jsonContentOneOf from "@/openapi/helpers/json-content-one-of";
@@ -9,40 +9,40 @@ import createErrorSchema from "@/openapi/schemas/create-error-schema";
 import IdParamsSchema from "@/openapi/schemas/id-params.js";
 
 
-const tags = ["Threats"];
+const tags = ["tasks"];
 
 export const list = createRoute({
   method: "get",
-  path: "/threats",
+  path: "/tasks",
   tags,
   responses: {
-    200: jsonContent(z.array(SelectThreatsSchema), "List of all threats"),
+    200: jsonContent(z.array(SelecttasksSchema), "List of all tasks"),
   },
 });
 
 export const create = createRoute({
   method: "post",
-  path: "/threats",
+  path: "/tasks",
   tags,
   request: {
-    body: jsonContentRequired(InsertThreatsSchema, "Threat to create"),
+    body: jsonContentRequired(InserttasksSchema, "Threat to create"),
   },
   responses: {
-    200: jsonContent(SelectThreatsSchema, "Threat created successfully"),
-    422: jsonContent(createErrorSchema(InsertThreatsSchema), "Validation error"),
+    200: jsonContent(SelecttasksSchema, "Threat created successfully"),
+    422: jsonContent(createErrorSchema(InserttasksSchema), "Validation error"),
   },
 
 });
 
 export const getOne = createRoute({
   method: "get",
-  path: "/threats/{id}",
+  path: "/tasks/{id}",
   request: {
     params: IdParamsSchema,
   },
   tags,
   responses: {
-    200: jsonContent(SelectThreatsSchema, "Threat found"),
+    200: jsonContent(SelecttasksSchema, "Threat found"),
     422: jsonContent(createErrorSchema(IdParamsSchema), "Validation error"),
     404: jsonContent(notFoundSchema, "Threat not found"),
   },
@@ -52,22 +52,22 @@ export const getOne = createRoute({
 
 export const patch = createRoute({
   method: "patch",
-  path: "/threats/{id}",
+  path: "/tasks/{id}",
   tags,
   request: {
     params: IdParamsSchema,
-    body: jsonContentRequired(patchThreatsSchema, "Threat to update"),
+    body: jsonContentRequired(patchtasksSchema, "Threat to update"),
   },
   responses: {
-    200: jsonContent(SelectThreatsSchema, "Threat updated successfully"),
-    422: jsonContentOneOf([createErrorSchema(IdParamsSchema), createErrorSchema(patchThreatsSchema)], "Validation error"),
+    200: jsonContent(SelecttasksSchema, "Threat updated successfully"),
+    422: jsonContentOneOf([createErrorSchema(IdParamsSchema), createErrorSchema(patchtasksSchema)], "Validation error"),
     404: jsonContent(notFoundSchema, "Threat not found"),
   },
 });
 
 export const remove = createRoute({
   method: "delete",
-  path: "/threats/{id}",
+  path: "/tasks/{id}",
   tags,
   request: {
     params: IdParamsSchema,

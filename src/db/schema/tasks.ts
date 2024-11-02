@@ -7,7 +7,7 @@ import { z } from "zod";
 
 extendZodWithOpenApi(z);
 
-const threats = sqliteTable("threats", {
+const tasks = sqliteTable("tasks", {
   id: integer({ mode: "number" }).primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
 
@@ -16,16 +16,16 @@ const threats = sqliteTable("threats", {
   updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).$onUpdate(() => new Date()),
 });
 
-export default threats;
+export default tasks;
 
-export const SelectThreatsSchema = createSelectSchema(threats, {
+export const SelecttasksSchema = createSelectSchema(tasks, {
   name: z.string().min(1, "required_name").openapi({ example: "Jane Doe" }),
   email: z.string().email("invalid_email").openapi({ example: "jane.doe@example.com" }),
   createdAt: z.coerce.date().openapi({ example: "2023-01-01T00:00:00Z" }),
   updatedAt: z.coerce.date().openapi({ example: "2023-01-01T00:00:00Z" }),
 });
 
-export const InsertThreatsSchema = createInsertSchema(threats, {
+export const InserttasksSchema = createInsertSchema(tasks, {
   name: z.string().min(1, "required_name").openapi({ example: "John Smith" }),
   email: z.string().email("invalid_email").openapi({ example: "john.smith@example.com" }),
 }).omit({
@@ -34,4 +34,4 @@ export const InsertThreatsSchema = createInsertSchema(threats, {
   updatedAt: true,
 });
 
-export const patchThreatsSchema = InsertThreatsSchema.partial();
+export const patchtasksSchema = InserttasksSchema.partial();
