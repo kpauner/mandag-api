@@ -3,7 +3,7 @@ import { execSync } from "node:child_process";
 import fs from "node:fs";
 import { afterAll, beforeAll, describe, expect, expectTypeOf, it } from "vitest";
 
-import env from "@/env";
+import env from "@/env-runtime";
 import createApp, { createTestApp } from "@/lib/create-app";
 
 import router from "./threats.index";

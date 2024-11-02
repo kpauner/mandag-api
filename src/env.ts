@@ -28,21 +28,16 @@ export const envSchema = z.object({
   }
 });
 
-export type Env = z.infer<typeof envSchema>;
+export type Environment = z.infer<typeof envSchema>;
 
-function loadEnv(): Env {
-  try {
-    // eslint-disable-next-line node/no-process-env
-    const env = envSchema.parse(process.env);
-    return env;
+export function parseEnv(data: any) {
+  const { data: env, error } = envSchema.safeParse(data);
+  if (error) {
+    const errorMessage = `Invalid environment variables: ${Object.entries(error.flatten().fieldErrors).map(([key, value]) => `${key}: ${value}`).join("\n")}`;
+    throw new Error(errorMessage);
   }
-  catch (e) {
-    const error = e as z.ZodError;
-    console.error("Invalid environment variables:", error.flatten().fieldErrors);
-    process.exit(1);
-  }
+  return env;
 }
 
-const env = loadEnv();
 
-export default env;
+

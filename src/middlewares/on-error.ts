@@ -3,9 +3,11 @@ import type { StatusCode } from "hono/utils/http-status";
 
 import { StatusCodes } from "http-status-codes";
 
-import env from "@/env";
+
+import { createDb } from "@/db";
 
 const onError: ErrorHandler = (err, c) => {
+  const { db } = createDb(c.env);
   const currentStatus = "status" in err
     ? err.status
     : c.newResponse(null).status;
@@ -13,7 +15,7 @@ const onError: ErrorHandler = (err, c) => {
     ? (currentStatus as StatusCode)
     : StatusCodes.INTERNAL_SERVER_ERROR;
 
-  const nodeEnv = c.env?.NODE_ENV || env.NODE_ENV;
+  const nodeEnv = c.env?.NODE_ENV || c.env.NODE_ENV;
   return c.json(
     {
       message: err.message,

@@ -1,7 +1,9 @@
+import { Environment } from "@/env";
 import type { OpenAPIHono, RouteConfig, RouteHandler, z } from "@hono/zod-openapi";
 import type { PinoLogger } from "hono-pino";
 
 export interface AppBindings {
+  Bindings: Environment;
   Variables: {
     logger: PinoLogger;
   };

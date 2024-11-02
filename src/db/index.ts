@@ -2,13 +2,17 @@ import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 
 import * as schema from "@/db/schema";
-import env from "@/env";
+import { Environment } from "@/env";
 
-export const client = createClient({
+export function createDb(env: Environment) {
+const client = createClient({
   url: env.DATABASE_URL as string,
   authToken: env.TURSO_AUTH_TOKEN as string,
 });
 
-export const db = drizzle(client, { logger: true, schema });
+const db = drizzle(client, { logger: true, schema });
 
-export type DB = typeof db;
+return { db, client };
+}
+
+export type DB = ReturnType<typeof createDb>['db'];

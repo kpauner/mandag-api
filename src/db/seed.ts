@@ -1,7 +1,7 @@
 import * as schema from "@/db/schema";
-import env from "@/env";
+import env from "@/env-runtime";
 
-import { db } from ".";
+import { createDb } from ".";
 import * as seeds from "./seeds";
 
 if (env.NODE_ENV !== "development") {
@@ -9,6 +9,7 @@ if (env.NODE_ENV !== "development") {
 }
 
 async function seedDatabase() {
+  const { db } = createDb(env);
   for (const table of [
     schema.threats,
 
