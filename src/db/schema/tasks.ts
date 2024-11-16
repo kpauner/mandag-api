@@ -11,7 +11,11 @@ const tasks = sqliteTable("tasks", {
   id: integer({ mode: "number" }).primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
   description: text("description"),
-  userId: text("user_id").notNull().references(() => users.id),
+  type: text("type").notNull().default("task"),
+  startAt: integer("start_at", { mode: "timestamp" }).notNull(),
+  duration: integer("duration").notNull(),
+  recurring: text("recurring").$type<string[]>().notNull().default(["none"]),
+  userId: integer("user_id").notNull().references(() => users.id),
   createdAt: integer("created_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`),
   updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`).$onUpdate(() => new Date()),
 });
@@ -35,3 +39,7 @@ export const InserttasksSchema = createInsertSchema(tasks, {
 });
 
 export const patchtasksSchema = InserttasksSchema.partial();
+
+export type InsertTask = typeof tasks.$inferInsert;
+export type Task = typeof tasks.$inferSelect;
+

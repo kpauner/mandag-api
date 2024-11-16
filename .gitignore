@@ -31,3 +31,6 @@ lerna-debug.log*
 dev.db
 test.db
 .vercel
+
+# wrangler
+.wrangler

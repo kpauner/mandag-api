@@ -1,4 +1,4 @@
-name = "Mandag API"
+name = "mandag-api"
 main = "src/app.ts"
 compatibility_date = "2024-09-25"
 compatibility_flags = [ "nodejs_compat" ]

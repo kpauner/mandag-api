@@ -1,6 +1,32 @@
 [
   {
-    "name": "John Doe",
-    "email": "john.doe@example.com"
+    "id": "serial",
+    "name": "Complete project proposal",
+    "description": "Finish and submit the project proposal document",
+    "type": "task",
+    "duration": 30,
+    "startAt": "2024-10-25T12:30:00.000Z",
+    "recurring": ["none"],
+    "userId": 1
+  },
+  {
+    "id": "team-meeting",
+    "name": "Team meeting",
+    "description": "Attend weekly team sync-up",
+    "type": "workout",
+    "duration": 60,
+    "startAt": "2024-10-25T10:00:00.000Z",
+    "recurring": ["monday", "wednesday", "friday"],
+    "userId": 1
+  },
+  {
+    "id": "Daily-workout",
+    "name": "Daily workout",
+    "description": "Elastics workout",
+    "type": "workout",
+    "duration": 30,
+    "startAt": "2024-10-25T10:00:00.000Z",
+    "recurring": ["monday", "wednesday", "friday"],
+    "userId": 1
   }
 ]
