@@ -8,7 +8,7 @@ import { cors } from "hono/cors";
 const app = createApp();
 
 app.use('/*', cors({
-  origin: ['http://localhost:3000'], // or whatever your frontend URL is
+  origin: ['http://localhost:3000'],
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
