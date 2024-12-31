@@ -1,6 +1,6 @@
 # Task Management API
 
-A modern REST API built with Hono and TypeScript, deployed on Cloudflare Workers. This API demonstrates best practices in API design including:
+A modern REST API built with Hono and TypeScript, deployed on Cloudflare Workers.
 
 - OpenAPI documentation using `@hono/zod-openapi`
 - Type-safe request/response handling with Zod schemas
