@@ -1,36 +1,27 @@
-# Mandag API
+# Task Management API
 
-![Mandag header](images/header-readme.png)
+A modern REST API built with Hono and TypeScript, deployed on Cloudflare Workers. This API demonstrates best practices in API design including:
 
-The Mandag API powers the backend services for the Mandag digital toolset, a platform for the Monster Of The Week tabletop role-playing game.
+- OpenAPI documentation using `@hono/zod-openapi`
+- Type-safe request/response handling with Zod schemas
+- SQL database integration with Drizzle ORM
+- RESTful endpoints for task management (CRUD operations)
+- Read-only mode in production for demonstration purposes
+
+## API Endpoints
+
+- `GET /tasks` - List all tasks
+- `GET /tasks/{id}` - Get a specific task
+- `POST /tasks` - Create a new task
+- `PATCH /tasks/{id}` - Update a task
+- `DELETE /tasks/{id}` - Delete a task
 
 ## Tech Stack
 
-- **Runtime**: [Bun](https://bun.sh/)
-- **Web Framework**: [Hono](https://hono.dev/)
-- **API Documentation**: [OpenAPI](https://www.openapis.org/) & [Scalar](https://scalar.com/)
-- **Database**: [LibSQL](https://github.com/libsql/libsql)
-- **Object Storage**: [Cloudflare R2](https://www.cloudflare.com/products/r2/)
+- [Hono](https://hono.dev/) - Lightweight, ultrafast web framework
+- [Drizzle ORM](https://orm.drizzle.team/) - TypeScript ORM
+- [@hono/zod-openapi](https://github.com/honojs/middleware/tree/main/packages/zod-openapi) - OpenAPI integration
+- [Cloudflare Workers](https://workers.cloudflare.com/) - Edge runtime
+- [TypeScript](https://www.typescriptlang.org/) - Type safety and developer experience
 
-## Current and planned Key Features
-
-- Character management
-- Digital dice rolling (planned)
-- Bestiary database
-- Mystery tracking
-- User authentication (currently uses authjs internally)
-- Homebrew content creation and sharing (planned)
-
-An example for a potential external API that could serve as the backbone for Mandag's web application, providing secure and efficient data management for Monster Of The Week enthusiasts (Currently MotW but might have to switch later).
-
-## Getting Started
-
-[Include instructions for setting up and running the API locally]
-
-## Documentation
-
-API documentation is available [link to Scalar-generated docs when ready]
-
-## Contributing
-
-[Include guidelines for contributing to the API project]
+The API is deployed as a read-only demo, with full OpenAPI documentation available through Scalar.

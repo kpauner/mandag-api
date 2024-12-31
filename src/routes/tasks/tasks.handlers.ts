@@ -15,6 +15,10 @@ export const list: AppRouteHandler<ListRoute> = async (c) => {
 };
 
 export const create: AppRouteHandler<CreateRoute> = async (c) => {
+  if (c.env.NODE_ENV === 'production') {
+    return c.json({ message: 'This demo API is read-only in production' }, 403)
+  }
+
   const { db } = createDb(c.env);
   const body = c.req.valid("json");
   const [inserted] = await db.insert(tasks).values({
@@ -39,6 +43,10 @@ export const getOne: AppRouteHandler<GetOneRoute> = async (c) => {
 };
 
 export const patch: AppRouteHandler<PatchRoute> = async (c) => {
+  if (c.env.NODE_ENV === 'production') {
+    return c.json({ message: 'This demo API is read-only in production' }, 403)
+  }
+  
   const { db } = createDb(c.env);
   const { id } = c.req.valid("param");
   const updates = c.req.valid("json");
@@ -53,6 +61,10 @@ export const patch: AppRouteHandler<PatchRoute> = async (c) => {
 };
 
 export const remove: AppRouteHandler<RemoveRoute> = async (c) => {
+  if (c.env.NODE_ENV === 'production') {
+    return c.json({ message: 'This demo API is read-only in production' }, 403)
+  }
+
   const { db } = createDb(c.env);
   const { id } = c.req.valid("param");
 

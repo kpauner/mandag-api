@@ -29,9 +29,9 @@ export const create = createRoute({
   },
   responses: {
     200: jsonContent(SelecttasksSchema, "Threat created successfully"),
+    403: jsonContent(z.object({ message: z.string() }), "This demo API is read-only in production"),
     422: jsonContent(createErrorSchema(InserttasksSchema), "Validation error"),
   },
-
 });
 
 export const getOne = createRoute({
@@ -60,6 +60,7 @@ export const patch = createRoute({
   },
   responses: {
     200: jsonContent(SelecttasksSchema, "Threat updated successfully"),
+    403: jsonContent(z.object({ message: z.string() }), "This demo API is read-only in production"),
     422: jsonContentOneOf([createErrorSchema(IdParamsSchema), createErrorSchema(patchtasksSchema)], "Validation error"),
     404: jsonContent(notFoundSchema, "Threat not found"),
   },
@@ -74,8 +75,9 @@ export const remove = createRoute({
   },
   responses: {
     204: {
-      description: "Threat deleted successfully",
+      description: "Threat deleted successfully"
     },
+    403: jsonContent(z.object({ message: z.string() }), "This demo API is read-only in production"),
     404: jsonContent(notFoundSchema, "Threat not found"),
     422: jsonContent(createErrorSchema(IdParamsSchema), "Invalid ID"),
   },
