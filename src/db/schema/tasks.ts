@@ -25,6 +25,7 @@ export default tasks;
 export const SelecttasksSchema = createSelectSchema(tasks, {
   name: z.string().min(1, "required_name").openapi({ example: "Do the dishes" }),
   description: z.string().openapi({ example: "jane.doe@example.com" }),
+  recurring: z.string().array().openapi({ example: ["none"] }),
   createdAt: z.coerce.date().openapi({ example: "2023-01-01T00:00:00Z" }),
   updatedAt: z.coerce.date().openapi({ example: "2023-01-01T00:00:00Z" }),
 });

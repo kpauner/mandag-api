@@ -17,7 +17,10 @@ export const list: AppRouteHandler<ListRoute> = async (c) => {
 export const create: AppRouteHandler<CreateRoute> = async (c) => {
   const { db } = createDb(c.env);
   const body = c.req.valid("json");
-  const [inserted] = await db.insert(tasks).values(body).returning();
+  const [inserted] = await db.insert(tasks).values({
+    ...body,
+    recurring: body.recurring ? body.recurring.split(',') : ["none"]
+  }).returning();
   return c.json(inserted, 200);
 };
 
@@ -39,7 +42,10 @@ export const patch: AppRouteHandler<PatchRoute> = async (c) => {
   const { db } = createDb(c.env);
   const { id } = c.req.valid("param");
   const updates = c.req.valid("json");
-  const [data] = await db.update(tasks).set(updates).where(eq(tasks.id, id)).returning();
+  const [data] = await db.update(tasks).set({
+    ...updates,
+    recurring: updates.recurring ? updates.recurring.split(',') : undefined
+  }).where(eq(tasks.id, id)).returning();
   if (!data) {
     return c.json({ message: NOT_FOUND }, 404);
   }
